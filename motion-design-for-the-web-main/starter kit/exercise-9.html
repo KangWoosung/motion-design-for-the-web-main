@@ -38,11 +38,78 @@
 		}
 
 		/* Air */
+		svg {
+			width: 20rem;
+		}
+
+		svg text {
+			font-size: 5rem;
+			font-weight: 900;
+			stroke-width: 2;
+			letter-spacing: -6px;
+		}
+
+		svg text.text-body {
+			stroke: var(--loader-text-color);
+			animation: 4s infinite alternate animate-stroke;
+		}
+
+		svg text.dot {
+			fill: var(--loader-dot-color);
+			stroke: var(--loader-dot-color);
+			animation: 4s infinite alternate animate-dot;
+		}
+
+		/*  text 의 아웃라인 stroke 를 세부지정하는 속성들이다.  */
+		/*  stroke-dasharray 이게 마법의 항목인데...  */
+		/*  첫번째는 dash 의 length, 두번째는 dash 의 간격이다.  */
+		/*  즉, 0 32% 로, 초기에는 dash 의 길이 0 에서 출발해서 transition 이 진행되는 것!!  */
+		@keyframes animate-stroke {
+			0% {
+				fill: transparent;
+				stroke: var(--loader-text-color);
+				stroke-width: 3;
+				stroke-dashoffset: 25%;
+				stroke-dasharray: 0 32%;
+			}
+			50% {
+				fill: transparent;
+				stroke: var(--loader-text-color);
+				stroke-width: 3;
+			}
+			90%,
+			100% {
+				fill: var(--loader-text-color);
+				stroke: transparent;
+				stroke-width: 0;
+				stroke-dashoffset: -25%;
+				stroke-dasharray: 30% 0;
+			}
+		}
+
+		@keyframes animate-dot {
+			0%,
+			60% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+
 	</style>
 </head>
 <body>
 	<div class="loader-container">
 		<!-- Air -->
+		<svg viewBox="0 0 400 160">
+			<text x="50%" y="50%" dy=".32em" text-anchor="middle" class="text-body">
+				Graphix
+			</text>
+			<text x="50%" y="50%" dy=".32em" dx="2em" text-anchor="middle" class="text-body">
+				.
+			</text>
+		</svg>
 	</div>
 </body>
 </html>
