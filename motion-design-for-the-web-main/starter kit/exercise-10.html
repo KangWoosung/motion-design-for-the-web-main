@@ -166,7 +166,60 @@
 			transform: translate3d(3px, 3px, 0);
 		}
 
+
 		/* Air */
+		.button--loader {
+			display: flex;
+			gap: .25rem;
+		}
+		.button--loader > div {
+			width: .8rem;
+			height: .8rem;
+			background-color: white;
+			border-radius: 50%;
+			animation: 1.2s infinite ease-in-out scaleUp;
+		}
+		.button--loader > div:nth-child(1) {
+			animation-delay: -0.32s;
+		}
+		.button--loader > div:nth-child(2) {
+			animation-delay: -0.16s;
+		}
+
+		.button {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 3.5rem;
+		}
+
+		.button--loader {
+			display: none;
+		}
+
+
+		.button.loading .button--text {
+			display: none;
+		}
+		.button.loading .button--loader {
+			display: flex;
+		}
+		.button.success {
+			background-color: var(--contextual-success-base);
+		}
+		.button.loading {
+			cursor: wait;
+		}
+
+		@keyframes scaleUp {
+			0%, 80%, 100% {
+				transform: scale(0);
+			}
+			40% {
+				transform: scale(1);
+			}
+		}
+
 	</style>
 </head>
 <body>
@@ -197,9 +250,9 @@
 
 					<!-- Air -->
 					<div class="button--loader">
-						<div></div>
-						<div></div>
-						<div></div>
+						<div class=""></div>
+						<div class=""></div>
+						<div class=""></div>
 					</div>
 					<!-- End Air -->
 				</button>
@@ -217,6 +270,16 @@
 
 		submitButton.addEventListener('click', (e) => {
 			// Air
+			console.log("Button clicked")
+			e.preventDefault()
+			submitButton.classList.add('loading')
+			setTimeout(() => {
+				submitButton.classList.remove('loading')
+				submitButton.classList.add('success')
+
+				submitButtonText.innerHTML = "Login Successful!"
+				console.log("State restored")
+			}, 4000);
 		})
 	</script>
 </body>
